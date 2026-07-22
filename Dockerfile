@@ -27,6 +27,12 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+RUN mkdir -p storage/framework/views \
+  storage/framework/cache \
+  storage/framework/sessions \
+  bootstrap/cache \
+  && chmod -R 775 storage bootstrap/cache
+
 EXPOSE 8080
 
 CMD php artisan serve --host=0.0.0.0 --port=$PORT
